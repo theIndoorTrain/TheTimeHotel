@@ -1,12 +1,45 @@
 package com.xm.timeHotel.pojo;
 
-import lombok.Data;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
+import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotations.Version;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+/**
+ * <p>
+ * 用户
+ * </p>
+ *
+ * @author xm
+ * @since 2018-08-25
+ */
 @Data
-public class User {
-	
-	private String username;
-	private String password;
-	private String iconUrl;
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class User extends Model<User> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+    private String name;
+    private String username;
+    private Integer age;
+    private String phone;
+    private String email;
+
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

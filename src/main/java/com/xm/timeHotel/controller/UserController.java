@@ -1,51 +1,40 @@
 package com.xm.timeHotel.controller;
 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xm.timeHotel.controller.dto.UserDtoMapper;
-import com.xm.timeHotel.controller.dto.UserDto;
 import com.xm.timeHotel.pojo.User;
+import com.xm.timeHotel.service.UserService;
 
-@RestController("/user")
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+/**
+ * <p>
+ * 用户 前端控制器
+ * </p>
+ *
+ * @author xm
+ * @since 2018-08-25
+ */
+@Api(value="UserController",tags="用户 登录、登出、注册")
+@RestController
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
-	private UserDtoMapper userDtoMapper;
+	private UserService userService;
 	
-	@PostMapping("/login")
-	public Boolean doLogin(@RequestBody User user) {
-			if(user.getUsername().equals("admin")&&user.getPassword().equals("123456")) {
-				return true;
-			}
-			return false;
-	}
-	
-	@GetMapping("/icon/{username}") 
-	public String getIconUrl(@PathVariable String username) {
-		System.out.println("读取头像地址");
-		return "http://127.0.0.1:8088/1.jpg";
-	}
-	
-	@GetMapping("/logout") 
-	public void logout() {
-		System.out.println("用户退出");
-	}
-	
-	@PostMapping("/userDto")
-	public void getUser(UserDto userDto) {
-		User user = userDtoMapper.dtoToUser(userDto);
-		System.out.println(user);
-	}
-	
-	@PostMapping("/user")
-	public void getUserDto(User user) {
-		UserDto userDto = userDtoMapper.userToDto(user);
-		System.out.println(user);
+	@ApiOperation(value="查询用户列表",notes="用户列表")
+	@GetMapping("/list")
+	public List<User> list() {
+		return userService.list();
 	}
 
 }
+

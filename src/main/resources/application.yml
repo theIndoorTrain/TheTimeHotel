@@ -1,3 +1,24 @@
 #更改端口号
 server:
   port: 8088
+  
+
+    
+    
+#配置mp 
+mybatis-plus:      
+  type-aliases-package: com.xm.timeHotel.pojo
+  mapper-locations: classpath:/com/xm/timeHotel/mapper/xml/*.xml
+  global-config:
+    id-type: 0
+  configuration: 
+    map-underscore-to-camel-case: true
+    
+#配置druid数据源
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://10.1.51.31:3306/xm?useSSL=true
+    username: root
+    password: cube1501
+    driver-class-name:  com.mysql.jdbc.Driver
