@@ -1,6 +1,7 @@
 package com.xm.timeHotel.pojo;
 
 import com.baomidou.mybatisplus.enums.IdType;
+import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -15,11 +16,11 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户
+ * 
  * </p>
  *
  * @author xm
- * @since 2018-08-25
+ * @since 2018-08-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -30,11 +31,38 @@ public class User extends Model<User> {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    private String name;
+    /**
+     * 验证码
+     */
+    private Integer code;
+    /**
+     * 昵称
+     */
     private String username;
-    private Integer age;
-    private String phone;
+    /**
+     * 密码
+     */
+    private String password;
+    /**
+     * 账号
+     */
     private String email;
+    /**
+     * 性别
+     */
+    private Integer sex;
+    /**
+     * 生日
+     */
+    private Date birth;
+    /**
+     * 头像地址
+     */
+    private String icon;
+    /**
+     * 个性签名
+     */
+    private String signature;
 
 
     @Override

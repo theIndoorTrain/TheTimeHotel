@@ -5,15 +5,14 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xm.timeHotel.pojo.User">
         <id column="id" property="id" />
-        <result column="name" property="name" />
+        <result column="code" property="code" />
         <result column="username" property="username" />
-        <result column="age" property="age" />
-        <result column="phone" property="phone" />
+        <result column="password" property="password" />
         <result column="email" property="email" />
+        <result column="sex" property="sex" />
+        <result column="birth" property="birth" />
+        <result column="icon" property="icon" />
+        <result column="signature" property="signature" />
     </resultMap>
-    
-    <select id="list" resultMap="BaseResultMap">
-    select * from user
-    </select>
 
 </mapper>
