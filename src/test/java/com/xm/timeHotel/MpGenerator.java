@@ -16,7 +16,7 @@ public class MpGenerator {
 	@Test
     public void create() {
         
-        String tableName = "user";
+        String tableName = "groups";
         
         /**
          * 配置：

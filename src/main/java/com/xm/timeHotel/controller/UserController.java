@@ -2,6 +2,7 @@ package com.xm.timeHotel.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.xm.timeHotel.controller.dto.UserDto;
 import com.xm.timeHotel.controller.dto.UserDtoMapper;
 import com.xm.timeHotel.pojo.User;
+import com.xm.timeHotel.service.GroupsService;
 import com.xm.timeHotel.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -38,14 +40,21 @@ public class UserController {
 	private UserDtoMapper userDtoMapper;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private GroupsService groupService;
 	
 	
 	@ApiOperation(value="用户注册")
 	@ApiImplicitParam(value="UserDto",name="用户Dto")
 	@PostMapping("/sighIn")
-	public boolean sighIn(@RequestBody UserDto userDto) {
+	public UserDto sighIn(@RequestBody UserDto userDto) {
 		User user = userDtoMapper.dtoToUser(userDto);
-		return userService.insert(user);
+		if(userService.insert(user)) {
+			user = userService.selectOne(new EntityWrapper<User>().eq("email", user.getEmail()));
+			groupService.insert(user.getId(),"好友");
+			return userDtoMapper.userToDto(user);
+		}
+		return null;
 	}
 	
 	@ApiOperation(value="用户登录")
@@ -65,6 +74,14 @@ public class UserController {
 	@GetMapping("/logout")
 	public void logout() {
 		System.out.println("用户退出");
+	}
+	
+	@ApiOperation(value="根据用户id查询用户")
+	@GetMapping("/{id}")
+	public UserDto getById(@PathVariable Integer id) {
+		
+		return userDtoMapper.userToDto(userService.selectById(id));
+		
 	}
 
 }

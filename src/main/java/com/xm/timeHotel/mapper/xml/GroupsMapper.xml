@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm.timeHotel.mapper.GroupsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xm.timeHotel.pojo.Groups">
+        <id column="id" property="id" />
+        <result column="gname" property="gname" />
+    </resultMap>
+    
+    <resultMap   extends="BaseResultMap" id="FriendsResultMap" type="com.xm.timeHotel.pojo.Groups">
+    	<collection property="friends" ofType="com.xm.timeHotel.pojo.Friend">
+   			<association property="user" javaType="com.xm.timeHotel.pojo.User">
+   			
+   				<id column="fid" property="id" />
+		        <result column="username" property="username" />
+		        <result column="icon" property="icon" />
+   			
+   			</association>
+    	</collection>
+    </resultMap>
+    
+    <select id="selectIncludeFriendsByUid" resultMap="FriendsResultMap">
+    select a.id,a.gname,c.id as fid,c.icon,c.username from groups a left join  friend b on b.gid=a.id left join user c on b.uid=c.id where a.uid=#{uid}
+    </select>
+
+</mapper>
