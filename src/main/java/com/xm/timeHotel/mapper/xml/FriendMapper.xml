@@ -9,5 +9,22 @@
         <result column="gid" property="gid" />
         <result column="status" property="status" />
     </resultMap>
+    
+    <resultMap type="com.xm.timeHotel.pojo.Friend"  id="UserMap"  extends="BaseResultMap">
+    	<association property="user" javaType="com.xm.timeHotel.pojo.User">
+   			
+   				<id column="fid" property="id" />
+		        <result column="username" property="username" />
+		        <result column="icon" property="icon" />
+   				<result column="signature" property="signature"/>
+   			</association>
+    </resultMap>
+    
+    <select id="selectUser"  resultMap="UserMap">
+    select a.id as fid,a.username,a.signature,a.icon,b.* from user a 
+    left join friend b on a.id=b.uid 
+    left join groups c on c.uid=#{id} and c.id=b.gid 
+    where a.email=#{email}
+    </select>
 
 </mapper>

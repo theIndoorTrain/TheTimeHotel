@@ -57,6 +57,14 @@ public class UserController {
 		return null;
 	}
 	
+	@ApiOperation(value="用户信息修改")
+	@ApiImplicitParam(value="UserDto",name="用户Dto")
+	@PostMapping("/update")
+	public void update(@RequestBody UserDto userDto) {
+		User user = userDtoMapper.dtoToUser(userDto);
+		userService.updateById(user);
+	}
+	
 	@ApiOperation(value="用户登录")
 	@ApiImplicitParam(value="UserDto",name="用户Dto")
 	@PostMapping("/login")

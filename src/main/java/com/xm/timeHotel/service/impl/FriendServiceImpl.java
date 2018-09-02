@@ -4,6 +4,9 @@ import com.xm.timeHotel.pojo.Friend;
 import com.xm.timeHotel.mapper.FriendMapper;
 import com.xm.timeHotel.service.FriendService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
+import org.mapstruct.ap.shaded.freemarker.core.FMParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +19,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FriendServiceImpl extends ServiceImpl<FriendMapper, Friend> implements FriendService {
+	
+	@Autowired
+	private FriendMapper friendMapper;
+
+	@Override
+	public Friend selectUser(Integer id, String email) {
+		return friendMapper.selectUser(id,email);
+	}
 
 }

@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface FriendService extends IService<Friend> {
 
+	Friend selectUser(Integer id, String email);
+
 }

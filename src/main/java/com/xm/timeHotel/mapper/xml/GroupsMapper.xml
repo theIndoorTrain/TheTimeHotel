@@ -10,6 +10,7 @@
     
     <resultMap   extends="BaseResultMap" id="FriendsResultMap" type="com.xm.timeHotel.pojo.Groups">
     	<collection property="friends" ofType="com.xm.timeHotel.pojo.Friend">
+    		<id column="uid" property="id" />
    			<association property="user" javaType="com.xm.timeHotel.pojo.User">
    			
    				<id column="fid" property="id" />
@@ -21,7 +22,7 @@
     </resultMap>
     
     <select id="selectIncludeFriendsByUid" resultMap="FriendsResultMap">
-    select a.id,a.gname,c.id as fid,c.icon,c.username from groups a left join  friend b on b.gid=a.id left join user c on b.uid=c.id where a.uid=#{uid}
+    select a.id,a.gname,b.id as uid,c.id as fid,c.icon,c.username from groups a left join  friend b on b.gid=a.id left join user c on b.uid=c.id where a.uid=#{uid}
     </select>
 
 </mapper>
