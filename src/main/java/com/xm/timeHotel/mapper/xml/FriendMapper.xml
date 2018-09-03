@@ -7,6 +7,7 @@
         <id column="id" property="id" />
         <result column="uid" property="uid" />
         <result column="gid" property="gid" />
+        <result column="myid" property="myid" />
         <result column="status" property="status" />
     </resultMap>
     
@@ -25,6 +26,10 @@
     left join friend b on a.id=b.uid 
     left join groups c on c.uid=#{id} and c.id=b.gid 
     where a.email=#{email}
+    </select>
+    
+    <select id="getAddFriendList" resultMap="UserMap">
+    select a.id as fid,a.username,a.signature,a.icon,b.* from friend b,user a where b.uid=a.id and b.myid=#{myid}
     </select>
 
 </mapper>

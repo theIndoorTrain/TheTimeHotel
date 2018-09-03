@@ -1,6 +1,9 @@
 package com.xm.timeHotel.service;
 
 import com.xm.timeHotel.pojo.Friend;
+
+import java.util.List;
+
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -14,5 +17,7 @@ import com.baomidou.mybatisplus.service.IService;
 public interface FriendService extends IService<Friend> {
 
 	Friend selectUser(Integer id, String email);
+
+	List<Friend> getAddFriendList(Integer myid);
 
 }

@@ -2,6 +2,8 @@ package com.xm.timeHotel.mapper;
 
 import com.xm.timeHotel.pojo.Friend;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
@@ -17,5 +19,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
 public interface FriendMapper extends BaseMapper<Friend> {
 
 	Friend selectUser(@Param("id")Integer id, @Param("email")String email);
+
+	List<Friend> getAddFriendList(Integer myid);
 
 }

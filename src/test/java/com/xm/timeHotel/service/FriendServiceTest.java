@@ -18,8 +18,7 @@ public class FriendServiceTest {
 	
 	@Test
 	public void insert() {
-		Friend f = fs.selectUser(1, "1373572467@qq.com");
-		System.out.println(f.toString());
+		System.out.println(fs.getAddFriendList(2));
 	}
 
 }

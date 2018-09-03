@@ -37,13 +37,21 @@ public class Friend extends Model<Friend> {
      */
     private Integer uid;
     /**
+     * 用户id
+     */
+    private Integer myid;
+    /**
      * 分组id
      */
     private Integer gid;
     /**
      * 状态
      */
-    private Integer status;
+    private Boolean status;
+    /**
+     * 备注
+     */
+    private String note;
     
     @TableField(exist=false)
     private User user;
